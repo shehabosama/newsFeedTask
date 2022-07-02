@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.124" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/background_button.xml" value="0.1" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_access_time_white_24dp.xml" value="0.1655" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_account_circle_white_24dp.xml" value="0.176" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.1655" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_dialpad_white_24dp.xml" value="0.124" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1655" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_star_gold_24dp.xml" value="0.124" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_star_white_24dp.xml" value="0.1655" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/activity_details.xml" value="0.264" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/fragment_favorite_news_feed.xml" value="0.176" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/fragment_news_feed.xml" value="0.22826086956521738" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/item_list.xml" value="0.4" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/item_progress.xml" value="0.11302083333333333" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/menu/items_menu.xml" value="0.1" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/xml/tabs.xml" value="0.41424418604651164" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

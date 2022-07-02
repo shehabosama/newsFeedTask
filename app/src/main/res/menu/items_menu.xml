@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home"
+        app:cnb_iconColor="@color/colorOrange"
+        app:cnb_backgroundColor="@color/colorPrimary"
+        />
+    <item
+        android:id="@+id/activity"
+        android:icon="@drawable/ic_star_white_24dp"
+        android:title="Favorite"
+        app:cnb_iconColor="@color/colorOrange"
+        app:cnb_backgroundColor="@color/colorPrimary"/>
+
+</menu>
+
+    <!-- layout.xml -->
