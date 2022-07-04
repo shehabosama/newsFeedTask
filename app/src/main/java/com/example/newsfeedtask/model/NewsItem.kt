@@ -1,7 +1,6 @@
 package com.example.newsfeedtask.model
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import com.example.newsfeedtask.network.entities.FieldsNetwrokEntity
 import java.io.Serializable
 
 data class NewsItem(
@@ -15,5 +14,6 @@ data class NewsItem(
     val type: String="",
     val webPublicationDate: String="",
     val webTitle: String="",
-    val webUrl: String=""
+    val webUrl: String="",
+    val fields: Fields
 ):Serializable

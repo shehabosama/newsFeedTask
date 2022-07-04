@@ -8,5 +8,6 @@ import retrofit2.http.Url
 interface RetrofitAPI {
     @GET("search")
     suspend fun getNewsData(@Query("page") page: Int,
-                            @Query("api-key") api_key: String = "test"): MainResponse
+                            @Query("api-key") api_key: String = "test",
+                            @Query("show-fields")show_fields:String="thumbnail"): MainResponse
 }

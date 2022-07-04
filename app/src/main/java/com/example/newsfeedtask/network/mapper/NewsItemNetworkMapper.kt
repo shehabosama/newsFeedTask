@@ -5,6 +5,8 @@ import com.example.newsfeedtask.util.EntityMapper
 import javax.inject.Inject
 class NewsItemNetworkMapper @Inject
 constructor() : EntityMapper<NewsItemNetworkEntity, NewsItem> {
+    @Inject
+    lateinit var filedMapper:FieldMapper
     override fun mapFromEntity(entity: NewsItemNetworkEntity): NewsItem {
         return NewsItem(
             apiUrl = entity.apiUrl,
@@ -17,7 +19,9 @@ constructor() : EntityMapper<NewsItemNetworkEntity, NewsItem> {
             type = entity.type,
             webPublicationDate = entity.webPublicationDate,
             webTitle = entity.webTitle,
-            webUrl = entity.webUrl)
+            webUrl = entity.webUrl,
+            fields = filedMapper.mapFromEntity(entity.fieldsNetworkEntity)
+                 )
     }
 
     override fun mapToEntity(domainModel: NewsItem): NewsItemNetworkEntity {
@@ -32,7 +36,9 @@ constructor() : EntityMapper<NewsItemNetworkEntity, NewsItem> {
             type = domainModel.type,
             webPublicationDate = domainModel.webPublicationDate,
             webTitle = domainModel.webTitle,
-            webUrl = domainModel.webUrl)
+            webUrl = domainModel.webUrl,
+            fieldsNetworkEntity =filedMapper.mapToEntity(domainModel.fields!!)
+        )
     }
 
     fun mapFromEntityEntityList(entities:List<NewsItemNetworkEntity>):List<NewsItem>{

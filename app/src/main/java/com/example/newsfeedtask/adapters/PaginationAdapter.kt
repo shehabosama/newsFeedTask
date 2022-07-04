@@ -5,11 +5,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfeedtask.R
 import com.example.newsfeedtask.model.NewsItem
+import com.squareup.picasso.Picasso
 import java.util.*
 
 
@@ -37,10 +38,14 @@ class PaginationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val newsItem: NewsItem = list!![position]
-                val movieViewHolder: ResultViewHolder = holder as ResultViewHolder
-                movieViewHolder.newsTitle.text = newsItem.webTitle
-                movieViewHolder.newsDate.text = newsItem.webPublicationDate
-                movieViewHolder.setOnClick(newsItem,position)
+                val viewHolder: ResultViewHolder = holder as ResultViewHolder
+                viewHolder.newsTitle.text = newsItem.webTitle
+                viewHolder.newsDate.text = newsItem.webPublicationDate
+        Picasso.get()
+            .load(newsItem.fields!!.thumbnail)
+            .placeholder(R.drawable.news_icon)
+            .into(viewHolder.newsImageItewm)
+                viewHolder.setOnClick(newsItem,position)
     }
 
     fun removeAt(position: Int) {
@@ -75,10 +80,12 @@ class PaginationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     class ResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
          val newsTitle: TextView
          val newsDate: TextView
+         val newsImageItewm: ImageView
          lateinit var supNewsItemInterAction:NewsItemInterAction
         init {
             newsTitle = itemView.findViewById<View>(R.id.newsTitle) as TextView
             newsDate = itemView.findViewById<View>(R.id.newsDate) as TextView
+            newsImageItewm = itemView.findViewById(R.id.image_item)
             supNewsItemInterAction = _newsItemInterAction!!
         }
         fun setOnClick(newsItem:NewsItem, position: Int){

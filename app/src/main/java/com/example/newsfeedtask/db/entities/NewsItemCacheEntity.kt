@@ -28,7 +28,10 @@ data class NewsItemCacheEntity(
     @ColumnInfo(name = "webTitle")
     val webTitle: String="",
     @ColumnInfo(name = "webUrl")
-    val webUrl: String=""
-) {
+    val webUrl: String="",
+    @ColumnInfo(name = "thumbnail")
+    val fieldsCacheEntity: FieldsCacheEntity,
+
+    ) {
 
 }

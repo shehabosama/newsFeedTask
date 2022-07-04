@@ -31,6 +31,7 @@ data class NewsResponseNetworkEntity(
     val total: Int,
     @SerializedName("userTier")
     @Expose
-    val userTier: String
+    val userTier: String,
+
 
 )
