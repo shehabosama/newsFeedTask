@@ -33,8 +33,8 @@ constructor(
             for(newsItem in results){
                 newsItemDao.insertBlog(newsItemCacheMapper.mapToEntity(newsItem))
             }
-            val cachedBlogs = newsItemDao.getNewsItemEntities()
-            emit(DataState.Success(newsItemCacheMapper.mapFromEntityList(cachedBlogs)))
+//            val cachedBlogs = newsItemDao.getNewsItemEntities()
+            emit(DataState.Success(results))
         }catch (e: Exception){
             Log.e("error", "getBlogs: ",e.fillInStackTrace() )
             emit(DataState.Error(e))

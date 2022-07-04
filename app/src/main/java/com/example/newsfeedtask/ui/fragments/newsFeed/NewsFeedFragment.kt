@@ -36,7 +36,6 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , PaginationAdapt
     lateinit var recyclerView: RecyclerView
     var currentPage = 1
     var isLoading:Boolean = false
-    private var listOfNewsItems: MutableList<NewsItem>? = mutableListOf()
     lateinit var linearLayoutManager: LinearLayoutManager
     @Inject
     lateinit var helper:Helper
@@ -85,8 +84,7 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , PaginationAdapt
             when (dataState) {
                 is DataState.Success<List<NewsItem>> -> {
                     displayProgressBar(false)
-                    listOfNewsItems!!.addAll(dataState.data)
-                    paginationAdapter.addAll(listOfNewsItems!!)
+                    paginationAdapter.addAll(dataState.data)
                 }
                 is DataState.Error -> {
                     displayProgressBar(false)
