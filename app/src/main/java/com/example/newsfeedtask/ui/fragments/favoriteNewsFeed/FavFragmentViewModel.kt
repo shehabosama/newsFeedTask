@@ -21,6 +21,7 @@ class FavFragmentViewModel @Inject constructor(
     val dataFavNewsState:LiveData<DataState<List<NewsItem>>>
     get() = _dataFavNewsState
 
+
     private val _deleteDataFavNewsState:MutableLiveData<DataState<String>> = MutableLiveData()
     val deleteDataFavNewsState:LiveData<DataState<String>>
     get() = _deleteDataFavNewsState
@@ -31,6 +32,7 @@ class FavFragmentViewModel @Inject constructor(
                 is MainStateEvent.GetFavEvent -> {
                     favNewsRepository.getFavNewsItems().onEach { dataState ->
                         _dataFavNewsState.value = dataState
+
                     }.launchIn(viewModelScope)
                 }
                 is MainStateEvent.DeleteFavEvent->{

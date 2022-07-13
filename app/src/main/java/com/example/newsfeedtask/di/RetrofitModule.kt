@@ -38,7 +38,7 @@ object RetrofitModule {
     @Singleton
     @Provides
     fun provideRetrofit1(gson: Gson):Retrofit.Builder {
-        return Retrofit.Builder().baseUrl("https://content.guardianapis.com/").addConverterFactory(/*this for converting gson to java object*/GsonConverterFactory.create(gson))
+        return Retrofit.Builder().baseUrl("http://shehabosama.atwebpages.com").addConverterFactory(/*this for converting gson to java object*/GsonConverterFactory.create(gson))
     }
 
     @Singleton
