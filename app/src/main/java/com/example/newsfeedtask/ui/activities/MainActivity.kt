@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.newsfeedtask.R
 import com.example.newsfeedtask.ui.fragments.favoriteNewsFeed.FavoriteNewsFeedFragment
 import com.example.newsfeedtask.ui.fragments.newsFeed.NewsFeedFragment
+import com.example.newsfeedtask.ui.fragments.uploadImage.UploadImageToServerFragment
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.fragment_container,
-               NewsFeedFragment()
+               UploadImageToServerFragment()
             ).commit()
         bottomMenu()
     }

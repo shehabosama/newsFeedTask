@@ -6,10 +6,15 @@ import com.example.newsfeedtask.db.daos.NewsItemDao
 import com.example.newsfeedtask.model.NewsItem
 import com.example.newsfeedtask.network.mapper.NewsItemNetworkMapper
 import com.example.newsfeedtask.network.RetrofitAPI
+import com.example.newsfeedtask.network.entities.ResponseStatus
 import com.example.newsfeedtask.util.DataState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import javax.inject.Inject
 
 class NewsRepository
@@ -21,7 +26,24 @@ constructor(
     private val newsItemNetworkMapper: NewsItemNetworkMapper
 )
 {
+    suspend fun uploadImage(file: File):Flow<DataState<ResponseStatus>> = flow{
+        emit(DataState.Loading)
+        delay(1000)
+        val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
+        val filePart = MultipartBody.Part.createFormData(
+            "uploaded_file",
+            "test.jpg",
+            requestBody
+        )
+        try {
+           val responseStatus =  retrofit.uploadFile(filePart)
+            emit(DataState.Success(responseStatus))
+        }catch (e:Exception){
+            Log.e("error", "uploadFail: ",e.fillInStackTrace() )
+            emit(DataState.Error(e))
+        }
 
+    }
     suspend fun getNewsItem(pageNumber:Int): Flow<DataState<List<NewsItem>>> = flow {
         emit(DataState.Loading)
         delay(1000)

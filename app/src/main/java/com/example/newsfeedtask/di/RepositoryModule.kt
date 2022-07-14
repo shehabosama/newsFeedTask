@@ -22,6 +22,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
+
+
     @Singleton
     @Provides
     fun provideBlogRepository(newsItemDao: NewsItemDao,
