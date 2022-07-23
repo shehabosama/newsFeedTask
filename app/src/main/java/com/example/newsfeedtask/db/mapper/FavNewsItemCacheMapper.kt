@@ -23,7 +23,6 @@ constructor() : EntityMapper<FavoriteNewsCacheEntity, NewsItem> {
             fields = fieldMapper.mapFromEntity(entity.fieldsCacheEntity)
         )
     }
-
     override fun mapToEntity(domainModel: NewsItem): FavoriteNewsCacheEntity {
         return FavoriteNewsCacheEntity(
             apiUrl = domainModel.apiUrl,
@@ -40,11 +39,7 @@ constructor() : EntityMapper<FavoriteNewsCacheEntity, NewsItem> {
             fieldsCacheEntity =fieldMapper.mapToEntity(domainModel.fields)
         )
     }
-
     fun mapFromEntityList(entities:List<FavoriteNewsCacheEntity>):List<NewsItem>{
-
         return entities.map { mapFromEntity(it) }
     }
-
-
 }

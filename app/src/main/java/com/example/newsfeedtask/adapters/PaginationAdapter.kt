@@ -81,7 +81,7 @@ class PaginationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
          val newsTitle: TextView
          val newsDate: TextView
          val newsImageItewm: ImageView
-         lateinit var supNewsItemInterAction:NewsItemInterAction
+         var supNewsItemInterAction:NewsItemInterAction?=null
         init {
             newsTitle = itemView.findViewById<View>(R.id.newsTitle) as TextView
             newsDate = itemView.findViewById<View>(R.id.newsDate) as TextView
@@ -90,7 +90,7 @@ class PaginationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         fun setOnClick(newsItem:NewsItem, position: Int){
             itemView.setOnClickListener(View.OnClickListener {
-                supNewsItemInterAction!!.onClick(newsItem,position)
+                supNewsItemInterAction?.onClick(newsItem,position)
             })
         }
 
