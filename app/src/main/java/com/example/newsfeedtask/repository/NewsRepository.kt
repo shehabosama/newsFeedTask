@@ -27,9 +27,7 @@ constructor(
         delay(1000)
         try{
             val networkBlogs = retrofit.getNewsData(page = pageNumber ,api_key = "test")
-
             val results = newsItemNetworkMapper.mapFromEntityEntityList(networkBlogs.response.newsItemNetworkEntities)
-
             for(newsItem in results){
                 newsItemDao.insertBlog(newsItemCacheMapper.mapToEntity(newsItem))
             }

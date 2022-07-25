@@ -1,5 +1,8 @@
 package com.example.newsfeedtask.network.mapper
+import android.util.Log
+import com.example.newsfeedtask.model.Fields
 import com.example.newsfeedtask.model.NewsItem
+import com.example.newsfeedtask.network.entities.FieldsNetwrokEntity
 import com.example.newsfeedtask.network.entities.NewsItemNetworkEntity
 import com.example.newsfeedtask.util.EntityMapper
 import javax.inject.Inject
@@ -20,7 +23,7 @@ constructor() : EntityMapper<NewsItemNetworkEntity, NewsItem> {
             webPublicationDate = entity.webPublicationDate,
             webTitle = entity.webTitle,
             webUrl = entity.webUrl,
-            fields = filedMapper.mapFromEntity(entity.fieldsNetworkEntity)
+            fields = filedMapper.mapFromEntity(entity.fieldsNetworkEntity?: FieldsNetwrokEntity(""))
                  )
     }
 
@@ -37,13 +40,11 @@ constructor() : EntityMapper<NewsItemNetworkEntity, NewsItem> {
             webPublicationDate = domainModel.webPublicationDate,
             webTitle = domainModel.webTitle,
             webUrl = domainModel.webUrl,
-            fieldsNetworkEntity =filedMapper.mapToEntity(domainModel.fields!!)
+            fieldsNetworkEntity =filedMapper.mapToEntity(domainModel.fields?: Fields(""))
         )
     }
 
     fun mapFromEntityEntityList(entities:List<NewsItemNetworkEntity>):List<NewsItem>{
         return entities.map { mapFromEntity(it) }
     }
-
-
 }

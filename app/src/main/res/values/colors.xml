@@ -17,4 +17,11 @@
     <color name="colorBlue">#16C3D2</color>
     <color name="colorRed">#D92D41</color>
     <color name="colorPurple">#778CF0</color>
+
+    <color name="colorContentPrimary">#1A1A1A</color>
+    <color name="colorContentPrimaryAlt">#FFFFFF</color>
+    <color name="colorContentSecondary">#6D6D6D</color>
+    <color name="colorContentSecondaryAlt">#CCFFFFFF</color>
+    <color name="colorContentThirdly">#f2f4f8</color>
+    <color name="colorContentThirdlyAlt">#80FFFFFF</color>
 </resources>

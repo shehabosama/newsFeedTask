@@ -39,6 +39,6 @@ data class NewsItemNetworkEntity(
     val webUrl: String,
     @SerializedName("fields")
     @Expose
-    val fieldsNetworkEntity:FieldsNetwrokEntity,
+    val fieldsNetworkEntity:FieldsNetwrokEntity?=null,
 
     )

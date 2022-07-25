@@ -1,6 +1,7 @@
 package com.example.newsfeedtask.ui.fragments.newsFeed
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,45 +9,53 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfeedtask.R
 import com.example.newsfeedtask.adapters.PaginationAdapter
+import com.example.newsfeedtask.databinding.FragmentNewsFeedBinding
 import com.example.newsfeedtask.model.NewsItem
 import com.example.newsfeedtask.ui.activities.DetailsActivity
 import com.example.newsfeedtask.util.DataState
 import com.example.newsfeedtask.util.Helper
 import com.example.newsfeedtask.util.PaginationScrollListener
+import com.example.newsfeedtask.util.viewBinding
+import com.example.newsfeedtask.widgets.toast.ErrorToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
+
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , PaginationAdapter.NewsItemInterAction {
+open class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , PaginationAdapter.NewsItemInterAction {
     private val viewModel: MainViewModel by viewModels()
-    private lateinit var progressBar: ProgressBar
-    lateinit var sb:StringBuilder
-    lateinit var paginationAdapter: PaginationAdapter
-    lateinit var recyclerView: RecyclerView
-    var currentPage = 1
-    var isLoading:Boolean = false
-    lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var sb:StringBuilder
+    private lateinit var paginationAdapter: PaginationAdapter
+    private var currentPage = 1
+    private var isLoading:Boolean = false
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var grideLayoutMangager: GridLayoutManager
+    private val binding by viewBinding(FragmentNewsFeedBinding::bind)
+    private val newsList:MutableList<NewsItem> = mutableListOf()
     @Inject
     lateinit var helper:Helper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initialization(view)
-        recyclerView.addOnScrollListener(object :PaginationScrollListener(linearLayoutManager){
+        initialization()
+
+        binding.recyclerView.addOnScrollListener(object :PaginationScrollListener(linearLayoutManager){
             override fun loadMoreItems() {
-                isLoading = true;
-                currentPage += 1;
-                loadNextPage(currentPage);
+                isLoading = true
+                currentPage += 1
+                loadNextPage(currentPage)
             }
             override fun isLastPage(): Boolean {
               return false
@@ -55,28 +64,29 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , PaginationAdapt
                 return false
             }
         })
-            if (helper.checkForInternet(requireContext())) {
-                viewModel.setStateEvent(MainStateEvent.GetNewsEvent, 1)
-            } else {
-                Toast.makeText(context , "You are offline now" , Toast.LENGTH_LONG).show()
-                viewModel.setStateEvent(MainStateEvent.GetOfflineNewsEvent)
-            }
 
-
+        if (helper.checkForInternet(requireContext())) {
+            viewModel.setStateEvent(MainStateEvent.GetNewsEvent, 1)
+        } else {
+            Toast.makeText(context , "You are offline now" , Toast.LENGTH_LONG).show()
+            viewModel.setStateEvent(MainStateEvent.GetOfflineNewsEvent)
+        }
     }
     private fun loadNextPage(pageNumber:Int) {
         viewModel.setStateEvent(MainStateEvent.GetNewsEvent, pageNumber)
     }
-    fun initialization(view:View){
-        progressBar = view.findViewById(R.id.progressBar)
-        recyclerView = view.findViewById(R.id.recyclerView)
+    private fun initialization()=with(binding){
         sb = StringBuilder()
-        linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        paginationAdapter =  PaginationAdapter(context,this)
+        recyclerViewSetup()
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = paginationAdapter
         setUpSwipe()
         subscribeObserver()
+    }
+    private fun recyclerViewSetup(){
+        linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        grideLayoutMangager = GridLayoutManager(context,2)
+        paginationAdapter =  PaginationAdapter(context,this)
     }
     private fun subscribeObserver() {
 
@@ -84,10 +94,12 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , PaginationAdapt
             when (dataState) {
                 is DataState.Success<List<NewsItem>> -> {
                     displayProgressBar(false)
+                    newsList.addAll(dataState.data)
                     paginationAdapter.addAll(dataState.data)
                 }
                 is DataState.Error -> {
                     displayProgressBar(false)
+                   ErrorToast.makeShortText(requireActivity() , dataState.exception.message!!).show()
                     displayError(dataState.exception.message)
                 }
                 is DataState.Loading -> {
@@ -169,11 +181,25 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , PaginationAdapt
                 }
             }
         val itemTouchHelper = ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
     }
 
     private fun convertDpToPx(dp: Int): Int {
         return Math.round(dp * (resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        if(requireActivity().resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding.recyclerView.layoutManager = grideLayoutMangager
+            binding.recyclerView.adapter = paginationAdapter
+            paginationAdapter.addAll(newsList)
+        }else{
+            binding.recyclerView.layoutManager = linearLayoutManager
+            binding.recyclerView.adapter = paginationAdapter
+            paginationAdapter.addAll(newsList)
+        }
     }
 
     private fun displayError(message:String?){
@@ -184,14 +210,14 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , PaginationAdapt
         }
     }
     private fun displayProgressBar(isDisplayed:Boolean){
-        progressBar.visibility = if(isDisplayed) View.VISIBLE else View.GONE
+        binding.progressBar.visibility = if(isDisplayed) View.VISIBLE else View.GONE
     }
 
     override fun onClick(newsItem: NewsItem?, position: Int) {
         val intent = Intent(context, DetailsActivity::class.java)
         intent.putExtra("RESULT_KEY", newsItem)
         startActivity(intent)
+     //   SuccessDialog.Builder(requireContext()).setMessage("hjghf").setCancelable(true).show()
     }
-
 
 }

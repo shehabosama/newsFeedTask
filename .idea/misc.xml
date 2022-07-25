@@ -5,19 +5,35 @@
       <map>
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.124" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/background_button.xml" value="0.1" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/bg_alerts.xml" value="0.1645" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/bg_dialog.xml" value="0.1645" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/bg_rounded_stroke_primary.xml" value="0.1645" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/bg_toast.xml" value="0.1645" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_access_time_white_24dp.xml" value="0.1655" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_account_circle_white_24dp.xml" value="0.176" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.1655" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_clear.xml" value="0.1645" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_dialpad_white_24dp.xml" value="0.124" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_hide_filled.xml" value="0.1645" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1655" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_search_white.xml" value="0.1645" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_star_gold_24dp.xml" value="0.124" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_star_white_24dp.xml" value="0.1655" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_status_success.xml" value="0.1645" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/drawable/ic_toast_error.xml" value="0.1645" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/activity_details.xml" value="0.264" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/dialog_error.xml" value="0.18854166666666666" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/dialog_success.xml" value="0.25416666666666665" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/fragment_favorite_news_feed.xml" value="0.176" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/fragment_news_feed.xml" value="0.22826086956521738" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/fragment_upload_image_to_server.xml" value="0.25416666666666665" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/item_list.xml" value="0.264" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/item_progress.xml" value="0.11302083333333333" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/toast_error.xml" value="0.11302083333333333" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/toast_success.xml" value="0.25416666666666665" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/view_search_input.xml" value="0.25416666666666665" />
+        <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/layout/view_toolbar.xml" value="0.2" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/menu/items_menu.xml" value="0.1" />
         <entry key="..\:/android_projects/newsFeedTask/app/src/main/res/xml/tabs.xml" value="0.41424418604651164" />
       </map>

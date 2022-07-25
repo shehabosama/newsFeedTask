@@ -37,7 +37,7 @@ constructor() : EntityMapper<FavoriteNewsCacheEntity, NewsItem> {
             webPublicationDate = domainModel.webPublicationDate,
             webTitle = domainModel.webTitle,
             webUrl = domainModel.webUrl,
-            fieldsCacheEntity =fieldMapper.mapToEntity(domainModel.fields)
+            fieldsCacheEntity =fieldMapper.mapToEntity(domainModel.fields!!)
         )
     }
 

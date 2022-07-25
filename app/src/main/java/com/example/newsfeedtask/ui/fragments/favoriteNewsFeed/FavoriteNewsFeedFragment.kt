@@ -19,9 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfeedtask.R
 import com.example.newsfeedtask.adapters.PaginationAdapter
+import com.example.newsfeedtask.databinding.ToastErrorBinding
 import com.example.newsfeedtask.model.NewsItem
 import com.example.newsfeedtask.ui.activities.DetailsActivity
 import com.example.newsfeedtask.util.DataState
+import com.example.newsfeedtask.widgets.toast.ErrorToast
+import com.example.newsfeedtask.widgets.toast.SuccessToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +34,6 @@ class FavoriteNewsFeedFragment : Fragment(R.layout.fragment_favorite_news_feed) 
     lateinit var sb:StringBuilder
     lateinit var paginationAdapter: PaginationAdapter
     lateinit var recyclerView: RecyclerView
-    private var listOfNewsItems: MutableList<NewsItem>? = mutableListOf()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressBar = view.findViewById(R.id.progressBar)
@@ -53,8 +55,7 @@ class FavoriteNewsFeedFragment : Fragment(R.layout.fragment_favorite_news_feed) 
             when (dataState) {
                 is DataState.Success<List<NewsItem>> -> {
                     displayProgressBar(false)
-                    listOfNewsItems!!.addAll(dataState.data)
-                    paginationAdapter.addAll(listOfNewsItems!!)
+                    paginationAdapter.addAll(dataState.data)
                 }
                 is DataState.Error -> {
                     displayProgressBar(false)

@@ -8,7 +8,7 @@ import com.example.newsfeedtask.db.daos.NewsItemDao
 import com.example.newsfeedtask.db.entities.FavoriteNewsCacheEntity
 import com.example.newsfeedtask.db.entities.NewsItemCacheEntity
 
-@Database(entities = [ NewsItemCacheEntity::class, FavoriteNewsCacheEntity::class] , version = 1)
+@Database(entities = [ NewsItemCacheEntity::class, FavoriteNewsCacheEntity::class] , version = 2)
 @TypeConverters(FieldConverter::class)
 abstract class Database :RoomDatabase(){
     abstract fun newsItemDao(): NewsItemDao

@@ -8,7 +8,7 @@ class FieldConverter {
     @TypeConverter
     fun fromField(fieldCacheEntity:FieldsCacheEntity):String{
         return JSONObject().apply {
-            put("thumbnail" , fieldCacheEntity.thumbnail)
+            put("thumbnail" , fieldCacheEntity.thumbnail?:"")
         }.toString()
     }
     @TypeConverter

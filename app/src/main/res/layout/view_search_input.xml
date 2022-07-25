@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_search"
+    android:gravity="center"
+    android:padding="4dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:padding="4dp"
+        app:srcCompat="@drawable/ic_search"
+        app:tint="@color/white"
+        tools:ignore="ContentDescription" />
+
+    <EditText
+        android:id="@+id/et_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:hint="search"
+        android:textCursorDrawable="@null"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+
+    <ImageView
+        android:id="@+id/img_clear"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        app:srcCompat="@drawable/ic_clear"
+        app:tint="@color/white"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>

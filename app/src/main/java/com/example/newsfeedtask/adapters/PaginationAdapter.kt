@@ -1,6 +1,7 @@
 package com.example.newsfeedtask.adapters
 
 
+import android.R.attr.data
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -41,11 +42,20 @@ class PaginationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 val viewHolder: ResultViewHolder = holder as ResultViewHolder
                 viewHolder.newsTitle.text = newsItem.webTitle
                 viewHolder.newsDate.text = newsItem.webPublicationDate
-        Picasso.get()
-            .load(newsItem.fields!!.thumbnail)
-            .placeholder(R.drawable.news_icon)
-            .into(viewHolder.newsImageItewm)
-                viewHolder.setOnClick(newsItem,position)
+
+
+        try {
+            Picasso.get()
+                .load(newsItem.fields!!.thumbnail)
+                .placeholder(R.drawable.news_icon)
+                .into(viewHolder.newsImageItewm)
+            viewHolder.setOnClick(newsItem,position)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Picasso.get()
+                .load(R.drawable.news_icon)
+                .into(viewHolder.newsImageItewm)
+        }
     }
 
     fun removeAt(position: Int) {

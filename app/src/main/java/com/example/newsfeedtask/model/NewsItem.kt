@@ -15,5 +15,5 @@ data class NewsItem(
     val webPublicationDate: String="",
     val webTitle: String="",
     val webUrl: String="",
-    val fields: Fields
+    val fields: Fields?=null
 ):Serializable

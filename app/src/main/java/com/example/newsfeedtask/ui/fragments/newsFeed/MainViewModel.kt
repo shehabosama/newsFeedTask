@@ -1,7 +1,11 @@
 package com.example.newsfeedtask.ui.fragments.newsFeed
 
-import androidx.lifecycle.*
-
+import android.os.Parcelable
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.newsfeedtask.model.NewsItem
 import com.example.newsfeedtask.repository.FavNewsRepository
 import com.example.newsfeedtask.repository.NewsRepository
@@ -12,6 +16,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -26,6 +32,7 @@ class MainViewModel @Inject constructor(
     private val _dataFavInsertState:MutableLiveData<DataState<String>> = MutableLiveData()
     val dataFavInsertState:LiveData<DataState<String>>
         get() = _dataFavInsertState
+    private var mRecyclerViewState: Parcelable? = null
 
     fun setStateEvent(mainStateEvent: MainStateEvent, pageNumber:Int=0, newsItem: NewsItem? = null){
 

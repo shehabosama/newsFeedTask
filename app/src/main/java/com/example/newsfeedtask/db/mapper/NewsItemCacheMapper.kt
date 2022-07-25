@@ -1,5 +1,7 @@
 package com.example.newsfeedtask.db.mapper
+import com.example.newsfeedtask.db.entities.FieldsCacheEntity
 import com.example.newsfeedtask.db.entities.NewsItemCacheEntity
+import com.example.newsfeedtask.model.Fields
 import com.example.newsfeedtask.model.NewsItem
 import com.example.newsfeedtask.util.EntityMapper
 import javax.inject.Inject
@@ -20,7 +22,7 @@ constructor() : EntityMapper<NewsItemCacheEntity, NewsItem> {
             webPublicationDate = entity.webPublicationDate,
             webTitle = entity.webTitle,
             webUrl = entity.webUrl,
-            fields =  fieldMapper.mapFromEntity(entity.fieldsCacheEntity)
+            fields =  fieldMapper.mapFromEntity(entity.fieldsCacheEntity?: FieldsCacheEntity(""))
         )
 
     }
@@ -38,7 +40,7 @@ constructor() : EntityMapper<NewsItemCacheEntity, NewsItem> {
             webPublicationDate = domainModel.webPublicationDate,
             webTitle = domainModel.webTitle,
             webUrl = domainModel.webUrl,
-            fieldsCacheEntity =fieldMapper.mapToEntity(domainModel.fields)
+            fieldsCacheEntity =fieldMapper.mapToEntity(domainModel.fields?:Fields(""))
         )
     }
 

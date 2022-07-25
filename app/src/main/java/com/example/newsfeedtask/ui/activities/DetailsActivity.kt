@@ -32,7 +32,7 @@ class DetailsActivity : AppCompatActivity() {
             webSiteTextView.text = newsItem.webUrl
             newsSectionTextView.text = newsItem.sectionName
             Picasso.get()
-                .load(newsItem.fields.thumbnail)
+                .load(newsItem.fields?.thumbnail).error(R.drawable.news_icon)
                 .placeholder(R.drawable.news_icon)
                 .into(newsImage)
         }
