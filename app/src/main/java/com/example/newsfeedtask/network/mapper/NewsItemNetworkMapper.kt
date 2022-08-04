@@ -44,7 +44,10 @@ constructor() : EntityMapper<NewsItemNetworkEntity, NewsItem> {
         )
     }
 
-    fun mapFromEntityEntityList(entities:List<NewsItemNetworkEntity>):List<NewsItem>{
+    fun mapFromEntityList(entities:List<NewsItemNetworkEntity>):List<NewsItem>{
         return entities.map { mapFromEntity(it) }
+    }
+    fun mapToEntityList(domainsEntities :List<NewsItem>):List<NewsItemNetworkEntity>{
+        return domainsEntities.map { mapToEntity(it) }
     }
 }

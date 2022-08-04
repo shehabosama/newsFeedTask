@@ -9,15 +9,16 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
+import android.widget.AbsListView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,10 +28,7 @@ import com.example.newsfeedtask.adapters.PaginationAdapter
 import com.example.newsfeedtask.databinding.FragmentNewsFeedBinding
 import com.example.newsfeedtask.model.NewsItem
 import com.example.newsfeedtask.ui.activities.DetailsActivity
-import com.example.newsfeedtask.util.DataState
-import com.example.newsfeedtask.util.Helper
-import com.example.newsfeedtask.util.PaginationScrollListener
-import com.example.newsfeedtask.util.viewBinding
+import com.example.newsfeedtask.util.*
 import com.example.newsfeedtask.widgets.toast.ErrorToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,29 +44,24 @@ open class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , Pagination
     private val viewModel: MainViewModel by viewModels()
     private lateinit var sb:StringBuilder
     private lateinit var paginationAdapter: PaginationAdapter
-    private var currentPage = 1
-    private var isLoading:Boolean = false
+    private var currentPage = 0
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var grideLayoutMangager: GridLayoutManager
     private val binding by viewBinding(FragmentNewsFeedBinding::bind)
     private val newsList:MutableList<NewsItem> = mutableListOf()
     @Inject
     lateinit var helper:Helper
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialization()
 
-        binding.recyclerView.addOnScrollListener(object :PaginationScrollListener(linearLayoutManager){
-            override fun loadMoreItems() {
-                isLoading = true
-                currentPage += 1
+        binding.idNestedSV.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                // in this method we are incrementing page number,
+                // making progress bar visible and calling get data method.
+                currentPage++
                 loadNextPage(currentPage)
-            }
-            override fun isLastPage(): Boolean {
-              return false
-            }
-            override fun isLoading(): Boolean {
-                return false
             }
         })
 
@@ -79,8 +72,10 @@ open class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , Pagination
             viewModel.setStateEvent(MainStateEvent.GetOfflineNewsEvent)
         }
     }
+
     private fun loadNextPage(pageNumber:Int) {
         viewModel.setStateEvent(MainStateEvent.GetNewsEvent, pageNumber)
+
     }
     private fun initialization()=with(binding){
         sb = StringBuilder()
@@ -230,12 +225,12 @@ open class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) , Pagination
 }
 
 
-fun <T> ComponentActivity.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T)->Unit){
-    lifecycleScope.launch {
-        repeatOnLifecycle(Lifecycle.State.STARTED){
-            flow.collectLatest(collect)
-        }
-    }
-}
+//fun <T> ComponentActivity.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T)->Unit){
+//    lifecycleScope.launch {
+//        repeatOnLifecycle(Lifecycle.State.STARTED){
+//            flow.collectLatest(collect)
+//        }
+//    }
+//}
 
 

@@ -9,6 +9,7 @@ import com.example.newsfeedtask.db.mapper.NewsItemCacheMapper
 import com.example.newsfeedtask.db.daos.NewsItemDao
 import com.example.newsfeedtask.network.mapper.NewsItemNetworkMapper
 import com.example.newsfeedtask.network.RetrofitAPI
+import com.example.newsfeedtask.network.mapper.NewsResponseMapper
 import com.example.newsfeedtask.repository.FavNewsRepository
 import com.example.newsfeedtask.repository.NewsRepository
 import dagger.Module
@@ -27,9 +28,9 @@ object RepositoryModule {
     fun provideBlogRepository(newsItemDao: NewsItemDao,
                               retrofitAPI: RetrofitAPI,
                               blogCacheMapper: NewsItemCacheMapper,
-                              newsItemNetworkMapper: NewsItemNetworkMapper
+                              newsItemNetworkMapper: NewsItemNetworkMapper,newResponseMapper:NewsResponseMapper
     ): NewsRepository {
-        return NewsRepository(retrofitAPI ,newsItemDao , blogCacheMapper,newsItemNetworkMapper )
+        return NewsRepository(retrofitAPI ,newsItemDao , blogCacheMapper,newsItemNetworkMapper,newResponseMapper )
     }
 
 

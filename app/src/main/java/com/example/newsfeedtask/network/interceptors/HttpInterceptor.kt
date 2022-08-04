@@ -4,9 +4,11 @@ import com.example.newsfeedtask.network.exceptions.InternalServerException
 import com.example.newsfeedtask.network.exceptions.NotFoundException
 import com.example.newsfeedtask.network.exceptions.UnauthorizedException
 import com.example.newsfeedtask.network.model.APIError
+import com.example.newsfeedtask.util.DataState
 import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.lang.Exception
 import javax.inject.Inject
 
 class HttpInterceptor @Inject constructor(

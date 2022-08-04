@@ -6,6 +6,7 @@ import com.example.newsfeedtask.network.interceptors.TokenInterceptor
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.newsfeedtask.BuildConfig
 import com.example.newsfeedtask.network.RetrofitAPI
+import com.example.newsfeedtask.network.interceptors.HttpInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -18,6 +19,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
@@ -61,7 +63,7 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(@ApplicationContext context: Context?, tokenInterceptor: TokenInterceptor): OkHttpClient {
+    fun provideOkHttpClient(@ApplicationContext context: Context?, tokenInterceptor: TokenInterceptor , interceptor2:HttpInterceptor): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         val okHttpClientBuilder = OkHttpClient.Builder()
@@ -70,6 +72,7 @@ object RetrofitModule {
             okHttpClientBuilder.addInterceptor(interceptor)
         }
         okHttpClientBuilder.addInterceptor(tokenInterceptor)
+        okHttpClientBuilder.addInterceptor( interceptor2)
         return okHttpClientBuilder
             .connectTimeout(120, TimeUnit.SECONDS)
             .writeTimeout(120, TimeUnit.SECONDS)
